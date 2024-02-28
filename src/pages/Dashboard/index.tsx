@@ -1,10 +1,13 @@
 import { type ReactNode } from "react";
+import RouteWithAnimation from "@/components/RouteWithAnimation/RouteWithAnimation.tsx";
 
 const Dashboard = (): ReactNode => {
   return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
+    <RouteWithAnimation>
+      <div>
+        <h1>Dashboard</h1>
+      </div>
+    </RouteWithAnimation>
   );
 };
 

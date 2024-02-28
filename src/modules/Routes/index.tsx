@@ -1,28 +1,23 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "@/pages/HomePage";
-import Dashboard from "@/pages/Dashboard";
 import About from "@/pages/About";
+import LocationProvider from "@/modules/Providers/MotionFrameProvider";
 import SimpleLayout from "@/components/Layouts/SimpleLayout.tsx";
+import { type ReactNode } from "react";
 
-const routes = createBrowserRouter([
-  {
-    path: "/",
-    element: <SimpleLayout />,
-    children: [
-      {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-    ],
-  },
-]);
+const RoutersComponent = (): ReactNode => {
+  const location = useLocation();
 
-export default routes;
+  return (
+    <LocationProvider>
+      <Routes location={location} key={location.key}>
+        <Route path="/" element={<SimpleLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/about" element={<About />} />
+        </Route>
+      </Routes>
+    </LocationProvider>
+  );
+};
+
+export default RoutersComponent;

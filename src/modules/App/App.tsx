@@ -1,14 +1,14 @@
 import compose from "@/modules/App/compose.tsx";
-import LocationProvider from "@/modules/Providers/MotionFrameProvider";
-import Router from "@/modules/Providers/RouterProvider";
 import { type ReactNode } from "react";
+import { BrowserRouter } from "react-router-dom";
+import RoutersComponent from "@/modules/Routes";
 
 function App(): ReactNode {
-  const ProviderCompose = compose(LocationProvider);
+  const ProviderCompose = compose(BrowserRouter);
 
   return (
     <ProviderCompose>
-      <Router />
+      <RoutersComponent />
     </ProviderCompose>
   );
 }
