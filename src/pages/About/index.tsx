@@ -4,15 +4,18 @@ import RouteWithAnimation from "@/components/RouteWithAnimation/RouteWithAnimati
 const About = (): ReactNode => {
   return (
     <RouteWithAnimation>
-      <article
+      <section
         style={{
-          backgroundColor: "rgba(48,14,72,0.67)",
+          display: "flex",
+          width: "100%",
+          flexDirection: "column",
+          flexGrow: 1,
         }}
       >
         <div>
-          <h1>About</h1>
+          <span>About</span>
         </div>
-      </article>
+      </section>
     </RouteWithAnimation>
   );
 };

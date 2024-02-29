@@ -1,57 +1,42 @@
-import { type FC, Fragment, type PropsWithChildren } from "react";
-import { motion, type Variants } from "framer-motion";
-
-const childVariants: Variants = {
-  enter: {
-    x: "100vw",
-    transition: {
-      duration: 0.5,
-    },
-  },
-  exit: {
-    x: "50px",
-    y: "50px",
-    transition: {
-      duration: 0.5,
-    },
-  },
-  initial: {
-    opacity: 0,
-    y: "50px",
-    x: "50px",
-  },
-  final: {
-    opacity: 1,
-    y: "0px",
-    x: "0px",
-    transition: {
-      duration: 0.5,
-      delay: 0.5,
-    },
-  },
-};
+import { type FC, type PropsWithChildren } from "react";
+import { motion } from "framer-motion";
 
 const RouteWithAnimation: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <Fragment>
-      <div
-        style={{
-          backgroundColor: "black",
-          position: "fixed",
-          width: "100%",
-          height: "100%",
-          zIndex: "0",
-        }}
-      />
-      <motion.article
-        variants={childVariants}
-        initial="initial"
-        animate="final"
-        exit="initial"
-      >
-        <motion.section variants={childVariants}>{children}</motion.section>
-      </motion.article>
-    </Fragment>
+    <motion.article
+      initial={{
+        transform: "scale(0.99) translateY(10px)",
+        opacity: 0,
+      }}
+      animate={{
+        transform: [
+          " scale(1) translateY(10px)",
+          "translateY(0)",
+          "translateY(0)",
+        ],
+        opacity: [0, 0.5, 1],
+        transition: {
+          duration: 0.5,
+        },
+      }}
+      exit={{
+        opacity: [1, 0, 0],
+        transform: [
+          "scale(1) translateY(0)",
+          "translateY(10px)",
+          "translateY(0)",
+        ],
+        transition: {
+          duration: 0.2,
+        },
+      }}
+      style={{
+        display: "flex",
+        width: "100%",
+      }}
+    >
+      {children}
+    </motion.article>
   );
 };
 

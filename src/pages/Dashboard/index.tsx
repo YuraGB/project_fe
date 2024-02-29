@@ -4,8 +4,15 @@ import RouteWithAnimation from "@/components/RouteWithAnimation/RouteWithAnimati
 const Dashboard = (): ReactNode => {
   return (
     <RouteWithAnimation>
-      <div>
-        <h1>Dashboard</h1>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+          flexGrow: 1,
+        }}
+      >
+        <span>Dashboard</span>
       </div>
     </RouteWithAnimation>
   );

@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 const SimpleLayout: FC<PropsWithChildren> = ({}) => {
   const headerStyle: CSSProperties = {
     textAlign: "center",
-    color: "#fff",
+    color: "#000",
     height: 64,
     paddingInline: 48,
     lineHeight: "64px",
@@ -14,16 +14,18 @@ const SimpleLayout: FC<PropsWithChildren> = ({}) => {
 
   const contentStyle: CSSProperties = {
     textAlign: "center",
+    position: "relative",
+    display: "flex",
     lineHeight: "120px",
     flexGrow: 1,
-    color: "#fff",
+    color: "#000",
     zIndex: 0,
     backgroundColor: "transparent",
   };
 
   const footerStyle: CSSProperties = {
     textAlign: "center",
-    color: "#fff",
+    color: "#000",
     backgroundColor: "#4096ff",
     zIndex: 5,
   };

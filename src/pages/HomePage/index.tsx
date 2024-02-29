@@ -6,10 +6,13 @@ const HomePage = (): ReactNode => {
     <RouteWithAnimation>
       <article
         style={{
-          backgroundColor: "rgba(50,248,0,0.67)",
+          display: "flex",
+          width: "100%",
+          flexDirection: "column",
+          flexGrow: 1,
         }}
       >
-        <h1>Home Page</h1>
+        <span>Home Page</span>
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/about">About</Link>
       </article>
