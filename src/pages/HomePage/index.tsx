@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { type ReactNode } from "react";
 import RouteWithAnimation from "@/components/RouteWithAnimation/RouteWithAnimation.tsx";
+
 const HomePage = (): ReactNode => {
   return (
     <RouteWithAnimation>
@@ -13,8 +13,6 @@ const HomePage = (): ReactNode => {
         }}
       >
         <span>Home Page</span>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/about">About</Link>
       </article>
     </RouteWithAnimation>
   );

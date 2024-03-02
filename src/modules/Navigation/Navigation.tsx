@@ -19,7 +19,15 @@ const items: MenuProps["items"] = [
         About
       </Link>
     ),
-    key: "alipay",
+    key: "about",
+  },
+  {
+    label: (
+      <Link to="/registration" rel="noopener noreferrer">
+        Registration
+      </Link>
+    ),
+    key: "Registration",
   },
 ];
 
