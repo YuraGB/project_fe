@@ -3,12 +3,14 @@ import {
   configureStore,
   type EnhancedStore,
 } from "@reduxjs/toolkit";
-// Or from '@reduxjs/toolkit/query/react'
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
-import { pokemonApi } from "../servises/pokemon";
+import { apiSlice } from "../servises/auth";
+import { authSliceReducer } from "@/modules/store/slices/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const rootReducer = combineReducers({
-  [pokemonApi.reducerPath]: pokemonApi.reducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
+  auth: authSliceReducer,
 });
 
 export const setupStore = (): EnhancedStore =>
@@ -17,9 +19,10 @@ export const setupStore = (): EnhancedStore =>
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(pokemonApi.middleware),
+      getDefaultMiddleware().concat(apiSlice.middleware),
   });
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore["dispatch"];
+export const useAppDispatch: () => AppDispatch = useDispatch;

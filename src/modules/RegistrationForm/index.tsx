@@ -6,17 +6,10 @@ import {
   tailFormItemLayout,
 } from "@/modules/RegistrationForm/config.ts";
 import { type ReactNode } from "react";
+import { useRegistrationHook } from "@/modules/RegistrationForm/useRegistrationHook.ts";
 
 const RegistrationForm = (): ReactNode => {
-  const [form] = Form.useForm();
-
-  const onFinish = (values: Record<string, { format: (arg0: string) => string }>): void => {
-    const formatSubmitData = {
-      ...values,
-      "date-picker": values["date-picker"].format("YYYY-MM-DD"),
-    };
-    console.log("Received values of form: ", formatSubmitData);
-  };
+  const { form, isLoading, onFinish } = useRegistrationHook();
 
   return (
     <Form
@@ -32,7 +25,6 @@ const RegistrationForm = (): ReactNode => {
       variant={"filled"}
     >
       <h1>Registration Form</h1>
-
       <Form.Item name="date-picker" label="Day of birth" {...datePickerConfig}>
         <DatePicker />
       </Form.Item>
@@ -94,7 +86,7 @@ const RegistrationForm = (): ReactNode => {
       </Form.Item>
 
       <Form.Item
-        name="nickname"
+        name="name"
         label="Nickname"
         tooltip="What do you want others to call you?"
         rules={[
@@ -137,7 +129,12 @@ const RegistrationForm = (): ReactNode => {
         </Checkbox>
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button
+          type="primary"
+          htmlType="submit"
+          disabled={isLoading}
+          loading={isLoading}
+        >
           Register
         </Button>
       </Form.Item>
