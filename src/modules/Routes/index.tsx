@@ -16,7 +16,7 @@ const RoutersComponent = (): ReactNode => {
           <Route index element={<HomePage />} />
           <Route path="/about" element={<About />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="*" element={<div>Not Found</div>} />
+          <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
     </LocationProvider>

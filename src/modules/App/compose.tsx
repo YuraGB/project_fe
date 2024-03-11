@@ -5,7 +5,7 @@ function compose(
 ): React.FC<{ children: ReactNode }> {
   return components.reduce(
     (Accumulator, Component) =>
-      // eslint-disable-next-line react/display-name
+      // eslint-disable-next-line
       ({ children }: PropsWithChildren): ReactNode => (
         <Accumulator>
           <Component>{children}</Component>
