@@ -5,6 +5,8 @@ import LocationProvider from "@/modules/Providers/MotionFrameProvider";
 import SimpleLayout from "@/components/Layouts/SimpleLayout.tsx";
 import { type ReactNode } from "react";
 import Registration from "@/pages/Registration";
+import Login from "@/pages/Login";
+import Logout from "@/pages/Logout";
 
 const RoutersComponent = (): ReactNode => {
   const location = useLocation();
@@ -16,6 +18,8 @@ const RoutersComponent = (): ReactNode => {
           <Route index element={<HomePage />} />
           <Route path="/about" element={<About />} />
           <Route path="/registration" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>

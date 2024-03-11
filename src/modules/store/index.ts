@@ -15,6 +15,7 @@ const rootReducer = combineReducers({
 
 export const setupStore = (): EnhancedStore =>
   configureStore({
+    devTools: process.env.NODE_ENV !== "production",
     reducer: rootReducer,
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.

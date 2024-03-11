@@ -1,17 +1,30 @@
 import { apiSlice } from "@/modules/servises/auth";
-import { type TLoginUserData } from "@/modules/store/slices/auth/endpoints/types.ts";
-import { type TCreateUser, type User } from "@/modules/servises/auth/types.ts";
+import {
+  type TLoginUserData,
+  type TLogoutMutation,
+  type TReturnMutationUser,
+} from "@/modules/store/slices/auth/endpoints/types.ts";
+import { type TCreateUser } from "@/modules/servises/auth/types.ts";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    login: build.mutation({
+    login: build.mutation<
+      TReturnMutationUser,
+      { email: string; password: string }
+    >({
       query: (data: TLoginUserData) => ({
         url: "/auth/login",
         method: "POST",
         body: { ...data },
       }),
     }),
-    register: build.mutation<User & { accessToken: string }, TCreateUser>({
+    logout: build.mutation<TLogoutMutation, undefined>({
+      query: () => ({
+        url: "/auth/logout",
+        method: "POST",
+      }),
+    }),
+    register: build.mutation<TReturnMutationUser, TCreateUser>({
       query: (data: TCreateUser) => ({
         url: "/auth/signUp",
         method: "POST",
@@ -21,4 +34,5 @@ export const authApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation } = authApiSlice;
+export const { useRegisterMutation, useLoginMutation, useLogoutMutation } =
+  authApiSlice;

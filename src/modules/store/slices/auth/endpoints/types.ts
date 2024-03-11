@@ -11,3 +11,14 @@ export type TCreatedUser = {
   user: StoreUser;
   token: string;
 };
+
+export type TLoginMutation = {
+  email: string;
+  password: string;
+};
+
+export type TLogoutMutation = {
+  message: string;
+};
+
+export type TReturnMutationUser = User & { accessToken: string };
