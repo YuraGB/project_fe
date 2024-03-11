@@ -57,7 +57,7 @@ const RegistrationForm = (): ReactNode => {
         ]}
         hasFeedback
       >
-        <Input.Password />
+        <Input.Password autoComplete={"on"} />
       </Form.Item>
 
       <Form.Item
@@ -82,7 +82,7 @@ const RegistrationForm = (): ReactNode => {
           }),
         ]}
       >
-        <Input.Password />
+        <Input.Password autoComplete={"on"} />
       </Form.Item>
 
       <Form.Item

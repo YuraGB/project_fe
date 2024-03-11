@@ -17,3 +17,10 @@ export type TCreateUser = {
   phoneNumber: string;
   agreement: boolean;
 };
+
+export type TRefreshTokenSuccess = {
+  data: {
+    accessToken: string;
+    refreshToken: string;
+  };
+};

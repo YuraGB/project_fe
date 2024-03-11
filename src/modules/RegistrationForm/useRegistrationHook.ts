@@ -1,17 +1,24 @@
-import { Form } from "antd";
+import { Form, type FormProps } from "antd";
 import { useRegisterMutation } from "@/modules/store/slices/auth/endpoints";
-import type { FormProps } from "rc-field-form/lib/Form";
 import type { TCreateUser } from "@/modules/servises/auth/types.ts";
 import { useEffect } from "react";
 import { setTokenToLocalStorage } from "@/modules/servises/util/setHeadesAuth.ts";
 import { setCredentials } from "@/modules/store/slices/auth/authSlice.ts";
 import { useAppDispatch } from "@/modules/store";
+import { type FormInstance } from "antd/lib";
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const useRegistrationHook = () => {
+type TUseRegistrationHook = {
+  form: FormInstance;
+  onFinish: FormProps["onFinish"];
+  isLoading: boolean;
+  error: unknown;
+  data: unknown;
+};
+
+export const useRegistrationHook = (): TUseRegistrationHook => {
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();
-  const [registation, { isLoading, error, data }] = useRegisterMutation();
+  const [registration, { isLoading, error, data }] = useRegisterMutation();
 
   useEffect(() => {
     if (data?.accessToken) {
@@ -51,7 +58,7 @@ export const useRegistrationHook = () => {
       agreement: values.agreement,
     };
 
-    void registation(formatSubmitData);
+    void registration(formatSubmitData);
   };
 
   return {
