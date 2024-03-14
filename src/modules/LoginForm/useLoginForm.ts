@@ -1,10 +1,11 @@
 import { Form, type FormProps } from "antd";
-import { useLoginMutation } from "@/modules/store/slices/auth/endpoints";
+import * as endpoints from "@/modules/servises/auth/endpoints";
 import { useEffect } from "react";
 import { setTokenToLocalStorage } from "@/modules/servises/util/setHeadesAuth.ts";
 import { setCredentials } from "@/modules/store/slices/auth/authSlice.ts";
 import { useDispatch } from "react-redux";
 import type { FormInstance } from "antd/lib";
+import { useNavigate } from "react-router-dom";
 
 type TUseLoginForm = {
   form: FormInstance;
@@ -13,6 +14,8 @@ type TUseLoginForm = {
   isLoading: boolean;
 };
 export const useLoginForm = (): TUseLoginForm => {
+  const navigate = useNavigate();
+  const { useLoginMutation } = endpoints;
   const [form] = Form.useForm();
   const [submitLogin, { data, isLoading, error }] = useLoginMutation();
   const dispatch = useDispatch();
@@ -20,7 +23,6 @@ export const useLoginForm = (): TUseLoginForm => {
   useEffect(() => {
     if (data?.accessToken) {
       // save token to local storage
-      // reset form
       setTokenToLocalStorage(data.accessToken);
       dispatch(
         setCredentials({
@@ -35,7 +37,10 @@ export const useLoginForm = (): TUseLoginForm => {
           token: data.accessToken,
         }),
       );
+      // reset form
       form.resetFields();
+
+      navigate("/user");
     }
   }, [data]);
   const onFinish = (values: { email: string; password: string }): void => {

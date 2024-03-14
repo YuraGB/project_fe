@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import reducers from "./reducers";
-import { type StoreUser } from "@/modules/store/slices/auth/endpoints/types.ts";
+import { type StoreUser } from "@/modules/servises/auth/endpoints/types.ts";
 
 export type TSliceState = {
   user: null | StoreUser;

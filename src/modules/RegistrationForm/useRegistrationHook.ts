@@ -1,5 +1,5 @@
 import { Form, type FormProps } from "antd";
-import { useRegisterMutation } from "@/modules/store/slices/auth/endpoints";
+import { useRegisterMutation } from "@/modules/servises/auth/endpoints";
 import type { TCreateUser } from "@/modules/servises/auth/types.ts";
 import { useEffect } from "react";
 import { setTokenToLocalStorage } from "@/modules/servises/util/setHeadesAuth.ts";

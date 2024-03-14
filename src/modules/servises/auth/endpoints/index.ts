@@ -3,7 +3,7 @@ import {
   type TLoginUserData,
   type TLogoutMutation,
   type TReturnMutationUser,
-} from "@/modules/store/slices/auth/endpoints/types.ts";
+} from "@/modules/servises/auth/endpoints/types.ts";
 import { type TCreateUser } from "@/modules/servises/auth/types.ts";
 
 export const authApiSlice = apiSlice.injectEndpoints({

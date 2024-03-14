@@ -1,6 +1,6 @@
 import { type TSliceState } from "@/modules/store/slices/auth/authSlice.ts";
 import { type PayloadAction } from "@reduxjs/toolkit";
-import { type TCreatedUser } from "@/modules/store/slices/auth/endpoints/types.ts";
+import { type TCreatedUser } from "@/modules/servises/auth/endpoints/types.ts";
 
 export default {
   setCredentials: (state: TSliceState, action: PayloadAction<TCreatedUser>) => {

@@ -4,9 +4,8 @@ import About from "@/pages/About";
 import LocationProvider from "@/modules/Providers/MotionFrameProvider";
 import SimpleLayout from "@/components/Layouts/SimpleLayout.tsx";
 import { type ReactNode } from "react";
-import Registration from "@/pages/Registration";
-import Login from "@/pages/Login";
-import Logout from "@/pages/Logout";
+import UserRoutes from "@/modules/Routes/User";
+import AuthRoutes from "@/modules/Routes/Auth";
 
 const RoutersComponent = (): ReactNode => {
   const location = useLocation();
@@ -17,11 +16,11 @@ const RoutersComponent = (): ReactNode => {
         <Route path="/" element={<SimpleLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/about" element={<About />} />
-          <Route path="/registration" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/auth/*" element={<AuthRoutes />} />
+
           <Route path="*" element={<HomePage />} />
         </Route>
+        <Route path="/user/*" element={<UserRoutes />} />
       </Routes>
     </LocationProvider>
   );
