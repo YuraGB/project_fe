@@ -7,10 +7,12 @@ import {
 import { apiSlice } from "../servises/auth";
 import { authSliceReducer } from "@/modules/store/slices/auth/authSlice";
 import { useDispatch } from "react-redux";
+import { userApiSlice } from "@/modules/servises/user";
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   auth: authSliceReducer,
+  [userApiSlice.reducerPath]: userApiSlice.reducer,
 });
 
 export const setupStore = (): EnhancedStore =>
@@ -20,7 +22,9 @@ export const setupStore = (): EnhancedStore =>
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(apiSlice.middleware),
+      getDefaultMiddleware()
+        .concat(apiSlice.middleware)
+        .concat(userApiSlice.middleware),
   });
 
 export type RootState = ReturnType<typeof rootReducer>;
