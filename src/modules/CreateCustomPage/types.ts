@@ -1,25 +1,17 @@
-import { type FormListFieldData, type FormListOperation } from "antd";
-
-export type TFields = {
-  fields: FormListFieldData[];
-  add: FormListOperation["add"];
-  remove: FormListOperation["remove"];
+export type TWidget<T = object> = {
+  id: string;
+  type: string;
+  remove?: (id: string) => void;
+  widgetData: T;
 };
 
-export type TWidgetSelectProps = {
-  name: string[];
-  selectedWidget?: string;
-  remove: FormListOperation["remove"];
-  field: FormListFieldData;
+export type TPage = {
+  id: string;
+  title: string;
+  widgets: TWidget[];
 };
 
-export type TWidgetSelected = {
-  widgetName?: string;
-  fieldName: string;
-  remove: FormListOperation["remove"];
-  field: FormListFieldData;
-};
-
-export type TYoutubeWidgetCreate = {
-  name: string;
+export type TYoutubeType = {
+  youtube_title: string;
+  youtube_id: string;
 };

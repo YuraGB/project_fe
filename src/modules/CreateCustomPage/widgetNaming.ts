@@ -1,6 +1,6 @@
 export const widgets = {
   youtube: {
-    value: "Youtube",
+    value: "youtube",
     label: "Youtube",
   },
 };

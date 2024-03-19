@@ -1,27 +1,28 @@
 import SelectWidget from "@/modules/CreateCustomPage/components/SelectWidget";
 import { Button, Form } from "antd";
-import { Fragment, type ReactNode } from "react";
+import { type FC, type ReactNode, useRef } from "react";
 
-const AddNewWidget = (): ReactNode => {
+const AddNewWidget: FC<{ addWidget: (w: string) => void }> = ({
+  addWidget,
+}): ReactNode => {
+  const selectedWidget = useRef<string>("");
   return (
-    <Form.List name="widgets">
-      {(fields, newWidget) => (
-        <Fragment>
-          {fields.map((field) => (
-            <Form.Item name={field.name} key={field.key}>
-              <SelectWidget
-                name={[field.name + "widget_name"]}
-                remove={newWidget.remove}
-                field={field}
-              />
-            </Form.Item>
-          ))}
-          <Button type="dashed" onClick={() => { newWidget.add(); }} block>
-            + Add widget
-          </Button>
-        </Fragment>
-      )}
-    </Form.List>
+    <section>
+      <SelectWidget selectedWidget={selectedWidget} />
+      <Form.Item
+        style={{
+          margin: "24px",
+        }}
+      >
+        <Button
+          type="primary"
+          htmlType="button"
+          onClick={() => { addWidget(selectedWidget.current); }}
+        >
+          Add widget
+        </Button>
+      </Form.Item>
+    </section>
   );
 };
 

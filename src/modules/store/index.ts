@@ -8,11 +8,13 @@ import { apiSlice } from "../servises/auth";
 import { authSliceReducer } from "@/modules/store/slices/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { userApiSlice } from "@/modules/servises/user";
+import { pagesApi } from "@/modules/servises/page";
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   auth: authSliceReducer,
   [userApiSlice.reducerPath]: userApiSlice.reducer,
+  [pagesApi.reducerPath]: pagesApi.reducer,
 });
 
 export const setupStore = (): EnhancedStore =>
@@ -24,7 +26,8 @@ export const setupStore = (): EnhancedStore =>
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware()
         .concat(apiSlice.middleware)
-        .concat(userApiSlice.middleware),
+        .concat(userApiSlice.middleware)
+        .concat(pagesApi.middleware),
   });
 
 export type RootState = ReturnType<typeof rootReducer>;
