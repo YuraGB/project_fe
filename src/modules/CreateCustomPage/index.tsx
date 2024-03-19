@@ -1,27 +1,21 @@
-import { Form } from "antd";
-
-import AddNewPage from "@/modules/CreateCustomPage/components/AddNewPage";
 import { type ReactNode } from "react";
+import Pages from "@/modules/CreateCustomPage/components/Pages";
+import { useCreateCustomPage } from "@/modules/CreateCustomPage/useCreateCustomPage.ts";
+import AddNewPage from "@/modules/CreateCustomPage/components/AddNewPage";
 
 const CreateCustomPage = (): ReactNode => {
-  const [form] = Form.useForm();
-
+  const { pages, addPage } = useCreateCustomPage();
   return (
-    <Form
-      labelCol={{ span: 6 }}
-      wrapperCol={{ span: 18 }}
-      form={form}
-      name="dynamic_form_complex"
-      style={{ maxWidth: 600, width: "100%" }}
-      autoComplete="off"
-      initialValues={{ items: [{}] }}
+    <article
+      style={{
+        width: "50%",
+        minWidth: "300px",
+        margin: "0 auto",
+      }}
     >
-      <Form.List name="items">
-        {(fields, { add, remove }) => (
-          <AddNewPage fields={fields} add={add} remove={remove} />
-        )}
-      </Form.List>
-    </Form>
+      <AddNewPage addPage={addPage} />
+      <Pages list={pages} />
+    </article>
   );
 };
 

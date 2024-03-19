@@ -20,7 +20,7 @@ import { type QueryReturnValue } from "@reduxjs/toolkit/dist/query/baseQueryType
 
 // Define a service using a base URL and expected endpoints
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.VITE_BASE_SERVER_URL!,
+  baseUrl: import.meta.env.VITE_BASE_SERVER_URL as string,
   // credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as { auth: TSliceState }).auth.token;

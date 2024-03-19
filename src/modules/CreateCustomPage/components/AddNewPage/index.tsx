@@ -1,32 +1,23 @@
-import { Button, Card } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
-import { type TFields } from "@/modules/CreateCustomPage/types.ts";
-import { type FC } from "react";
-import AddNewWidget from "@/modules/CreateCustomPage/components/AddNewWidget";
+import { Button } from "antd";
+import { type FC, type PropsWithChildren } from "react";
 
-const AddNewPage: FC<TFields> = ({ fields, remove, add }) => {
+const AddNewPage: FC<PropsWithChildren & { addPage: () => void }> = ({
+  children,
+  addPage,
+}) => {
   return (
-    <div style={{ display: "flex", rowGap: 16, flexDirection: "column" }}>
-      {fields.map((field) => (
-        <Card
-          size="default"
-          title={`Page`}
-          key={field.key}
-          extra={
-            <CloseOutlined
-              onClick={() => {
-                remove(field.name);
-              }}
-            />
-          }
-        >
-          <AddNewWidget />
-        </Card>
-      ))}
-
-      <Button type="dashed" onClick={() => { add(); }} block>
-        + Add Page
+    <div
+      style={{
+        display: "flex",
+        rowGap: 16,
+        flexDirection: "column",
+        margin: "20px 0",
+      }}
+    >
+      <Button type="primary" block onClick={addPage}>
+        Add new page
       </Button>
+      {children}
     </div>
   );
 };
