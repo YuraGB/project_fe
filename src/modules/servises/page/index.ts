@@ -5,5 +5,6 @@ export const pagesApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_SERVER_URL_API as string,
   }),
+  tagTypes: ["Pages"],
   endpoints: (_builder) => ({}),
 });

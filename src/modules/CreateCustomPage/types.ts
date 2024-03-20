@@ -6,12 +6,7 @@ export type TWidget<T = object> = {
 };
 
 export type TPage = {
-  id: string;
+  id: number;
   title: string;
   widgets: TWidget[];
-};
-
-export type TYoutubeType = {
-  youtube_title: string;
-  youtube_id: string;
 };

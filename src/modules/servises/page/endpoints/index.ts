@@ -10,6 +10,21 @@ export const pagesApiSlice = pagesApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: [{ type: "Pages" }],
+    }),
+    getPagesByUserId: _build.query<TPage[], number>({
+      query: (id) => ({
+        url: `/pages?userId=${id}`,
+        method: "GET",
+      }),
+      providesTags: (_result, _error, _id) => [{ type: "Pages" }],
+    }),
+    removePage: _build.mutation<number, number>({
+      query: (id) => ({
+        url: `/page/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (_result, _error, _id) => [{ type: "Pages" }],
     }),
     getPage: _build.query<TPage, number>({
       query: (id) => ({
@@ -20,4 +35,9 @@ export const pagesApiSlice = pagesApi.injectEndpoints({
   }),
 });
 
-export const { useSavePageMutation, useGetPageQuery } = pagesApiSlice;
+export const {
+  useSavePageMutation,
+  useLazyGetPageQuery,
+  useLazyGetPagesByUserIdQuery,
+  useRemovePageMutation,
+} = pagesApiSlice;

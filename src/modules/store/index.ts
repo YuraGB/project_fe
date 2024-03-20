@@ -3,16 +3,18 @@ import {
   configureStore,
   type EnhancedStore,
 } from "@reduxjs/toolkit";
-// eslint-disable-next-line @typescript-eslint/no-restricted-imports
-import { apiSlice } from "../servises/auth";
-import { authSliceReducer } from "@/modules/store/slices/auth/authSlice";
 import { useDispatch } from "react-redux";
+
+import { apiSlice } from "@/modules/servises/auth";
+import { authSliceReducer } from "@/modules/store/slices/auth/authSlice";
 import { userApiSlice } from "@/modules/servises/user";
 import { pagesApi } from "@/modules/servises/page";
+import { pagesSliceReducer } from "@/modules/store/slices/page/pageSlice.ts";
 
 const rootReducer = combineReducers({
-  [apiSlice.reducerPath]: apiSlice.reducer,
   auth: authSliceReducer,
+  pages: pagesSliceReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
   [userApiSlice.reducerPath]: userApiSlice.reducer,
   [pagesApi.reducerPath]: pagesApi.reducer,
 });
