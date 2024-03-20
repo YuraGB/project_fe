@@ -3,17 +3,27 @@ import { type TPage, type TWidget } from "@/modules/CreateCustomPage/types.ts";
 import widgetsDefaults from "@/modules/CreateCustomPage/widgetsDefaults.ts";
 import { randomString } from "@/util";
 import { useInitData } from "@/modules/CreateCustomPage/components/Page/useInitData.ts";
+import { useRemovePage } from "@/modules/CreateCustomPage/api/useRemovePage.ts";
 
 export type TUsePage = {
   widgetsToDisplay: TWidget[];
   addWidget: (widget: string) => void;
   removeWidget: (widgetId: string) => void;
   initData: Record<string, object>;
+  onRemoveHandlerPage: (id: number) => void;
+  removeInPageProgress: boolean;
+  removedPage: number | undefined;
 };
+
 export const usePage = (page: TPage): TUsePage => {
   const { widgets } = page;
   const initData = useInitData(page);
   const [widgetsToDisplay, setWidgetsToDisplay] = useState<TWidget[]>(widgets);
+  const {
+    isLoading: removeInPageProgress,
+    data: removedPage,
+    onRemoveHandlerPage,
+  } = useRemovePage();
 
   const addWidget = (widget: string): void => {
     if (!widget) return;
@@ -21,7 +31,7 @@ export const usePage = (page: TPage): TUsePage => {
 
     if (newWidget) {
       setWidgetsToDisplay((prev) => {
-        return [...prev, { ...newWidget, id: randomString() }];
+        return [{ ...newWidget, id: randomString() }, ...prev];
       });
     }
   };
@@ -35,5 +45,8 @@ export const usePage = (page: TPage): TUsePage => {
     addWidget,
     removeWidget,
     initData,
+    onRemoveHandlerPage,
+    removeInPageProgress,
+    removedPage,
   };
 };

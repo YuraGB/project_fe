@@ -6,10 +6,17 @@ import AddNewWidget from "@/modules/CreateCustomPage/components/AddNewWidget";
 import { usePage } from "@/modules/CreateCustomPage/components/Page/usePage.ts";
 import Card from "antd/es/card/Card";
 import { useSubmit } from "@/modules/CreateCustomPage/components/Page/useSubmit.ts";
+import { CloseOutlined } from "@ant-design/icons";
 
 const Page: FC<{ page: TPage }> = ({ page }): ReactNode => {
   const [form] = Form.useForm();
-  const { widgetsToDisplay, removeWidget, addWidget, initData } = usePage(page);
+  const {
+    widgetsToDisplay,
+    removeWidget,
+    addWidget,
+    initData,
+    onRemoveHandlerPage,
+  } = usePage(page);
   const { onSubmit } = useSubmit();
 
   return (
@@ -22,6 +29,13 @@ const Page: FC<{ page: TPage }> = ({ page }): ReactNode => {
         width: "100%",
         marginBottom: "24px",
       }}
+      extra={
+        <CloseOutlined
+          onClick={() => {
+            onRemoveHandlerPage(page.id);
+          }}
+        />
+      }
     >
       <Form form={form} onFinish={onSubmit} initialValues={initData}>
         <Form.Item

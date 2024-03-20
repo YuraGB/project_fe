@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import { type TPage } from "@/modules/CreateCustomPage/types.ts";
-import { randomString } from "@/util";
-import { useGetPageQuery } from "@/modules/servises/page/endpoints";
+import { useFetchPages } from "@/modules/CreateCustomPage/api/useFetchPages.ts";
 
 const newPage = {
   id: "",
@@ -12,27 +10,20 @@ const newPage = {
 type TUseCreateCustomPage = {
   pages: TPage[];
   addPage: () => void;
+  isLoading: boolean;
 };
 
 export const useCreateCustomPage = (): TUseCreateCustomPage => {
-  const [pages, setPages] = useState<TPage[]>([newPage]);
-  // initial load
-  const { data } = useGetPageQuery(12, {
-    skip: true,
-  });
+  const { setPages, pages, isLoading } = useFetchPages();
 
   const addPage = (): void => {
-    setPages((prev) => [...prev, { ...newPage, id: randomString() }]);
+    // add new page with empty fields
+    setPages((prev: TPage[]) => [...prev, { ...newPage, id: Math.random() }]);
   };
-
-  useEffect(() => {
-    if (data) {
-      setPages((prev) => [...prev, data]);
-    }
-  }, [data]);
 
   return {
     pages,
     addPage,
+    isLoading,
   };
 };
