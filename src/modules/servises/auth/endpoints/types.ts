@@ -12,13 +12,17 @@ export type TCreatedUser = {
   token: string;
 };
 
-export type TLoginMutation = {
-  email: string;
-  password: string;
+export type TVerifyTokenResponse = {
+  accessToken: string;
+  refreshToken: string;
+  user: StoreUser;
 };
 
 export type TLogoutMutation = {
   message: string;
 };
 
-export type TReturnMutationUser = User & { accessToken: string };
+export type TReturnMutationUser = User & {
+  accessToken: string;
+  refreshToken: string;
+};
