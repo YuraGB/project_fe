@@ -13,6 +13,6 @@ export type ContentProps<T> = {
 };
 
 export type TYouTubeWidget = {
-  videoId: string;
-  title: string;
+  youtube_title: string;
+  youtube_id: string;
 };

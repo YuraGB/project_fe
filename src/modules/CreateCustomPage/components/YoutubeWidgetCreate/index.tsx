@@ -4,6 +4,7 @@ import { Form, Input, Space } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
 const YoutubeWidgetCreate: FC<{ widget: TWidget }> = ({ widget }) => {
+  console.log("widget", widget);
   return (
     <Space
       style={{
