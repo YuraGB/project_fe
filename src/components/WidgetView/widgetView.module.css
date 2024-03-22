@@ -1,0 +1,22 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    overflow: auto;
+    gap: 10px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 10px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.root:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}

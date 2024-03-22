@@ -7,15 +7,15 @@ export const useInitData = (page: TPage): TInitData => {
   const { id: pageId, title, widgets } = page;
   return useMemo(() => {
     const initialledWidgets = widgets.reduce(
-      (acc: Record<string, object>, { id, type, ...rest }) => {
+      (acc: Record<string, object>, { id, type, widgetData }) => {
         if (type in acc) {
           acc[type] = {
             ...acc[type],
-            [id]: { ...rest },
+            [id]: widgetData,
           };
           return acc;
         }
-        acc[type] = { [id]: { ...rest } };
+        acc[type] = { [id]: widgetData };
         return acc;
       },
       {},
