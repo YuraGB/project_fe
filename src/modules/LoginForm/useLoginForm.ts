@@ -1,11 +1,12 @@
 import { Form, type FormProps } from "antd";
 import * as endpoints from "@/modules/servises/auth/endpoints";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { setTokenToLocalStorage } from "@/modules/servises/util/setHeadesAuth.ts";
 import { setCredentials } from "@/modules/store/slices/auth/authSlice.ts";
 import { useDispatch } from "react-redux";
 import type { FormInstance } from "antd/lib";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type TUseLoginForm = {
   form: FormInstance;
@@ -16,9 +17,17 @@ type TUseLoginForm = {
 export const useLoginForm = (): TUseLoginForm => {
   const navigate = useNavigate();
   const { useLoginMutation } = endpoints;
+  const toastRef = useRef<number | string>();
   const [form] = Form.useForm();
   const [submitLogin, { data, isLoading, error }] = useLoginMutation();
   const dispatch = useDispatch();
+
+  const onFinish = (values: { email: string; password: string }): void => {
+    if (values.email && values.password) {
+      toastRef.current = toast.loading("Login in...");
+      void submitLogin(values);
+    }
+  };
 
   useEffect(() => {
     if (data?.accessToken) {
@@ -40,13 +49,30 @@ export const useLoginForm = (): TUseLoginForm => {
       // reset form
       form.resetFields();
 
+      if (toastRef.current) {
+        toast.update(toastRef.current, {
+          render: "Login success",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
       navigate("/user");
     }
   }, [data]);
-  const onFinish = (values: { email: string; password: string }): void => {
-    if (values.email && values.password) {
-      void submitLogin(values);
+
+  useEffect(() => {
+    if (error) {
+      if (toastRef.current) {
+        toast.update(toastRef.current, {
+          render: "Login failed",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
     }
-  };
+  }, [error]);
+
   return { form, onFinish, error, isLoading };
 };
