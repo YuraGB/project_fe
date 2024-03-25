@@ -1,6 +1,7 @@
-export type TWidget<T = object> = {
+export type TWidget<T = { title: string }> = {
   id: string;
   type: string;
+  title?: string;
   remove?: (id: string) => void;
   widgetData: T;
 };

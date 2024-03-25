@@ -5,10 +5,16 @@ import PagesViewList from "@/modules/PagesViewList";
 const UserHome = (): ReactNode => {
   return (
     <RouteWithAnimation>
-      <div>
-        <h1>User Home</h1>
-      </div>
-      <PagesViewList />
+      <section
+        style={{
+          margin: "0 auto",
+        }}
+      >
+        <div>
+          <h1>User Home</h1>
+        </div>
+        <PagesViewList />
+      </section>
     </RouteWithAnimation>
   );
 };

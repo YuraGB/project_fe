@@ -12,7 +12,6 @@ const YoutubeWidgetView: FC<{ widget: TWidget }> = ({ widget }) => {
 
   return (
     <section>
-      <h3>{youtube_title}</h3>
       <YouTube
         videoId={youtube_id} // defaults -> ''
         // id={string} // defaults -> ''
