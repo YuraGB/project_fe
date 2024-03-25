@@ -25,7 +25,7 @@ export const useFetchPages = (): TUseFetchPages => {
     if (!pages.length && user?.id) {
       void fetchPages(user.id);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (data) {
