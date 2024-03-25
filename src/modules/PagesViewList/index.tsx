@@ -19,7 +19,7 @@ const PagesViewList = () => {
   return (
     <article
       style={{
-        width: "50%",
+        width: "100%",
         minWidth: "300px",
         margin: "0 auto",
       }}

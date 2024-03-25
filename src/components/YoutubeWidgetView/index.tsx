@@ -8,28 +8,30 @@ const YoutubeWidgetView: FC<{ widget: TWidget }> = ({ widget }) => {
 
   const { widgetData } = widget;
 
-  console.log("widgetData", widgetData);
   const { youtube_id, youtube_title } = widgetData as TYouTubeWidget;
 
   return (
-    <YouTube
-      videoId={youtube_id} // defaults -> ''
-      // id={string} // defaults -> ''
-      // className={string} // defaults -> ''
-      // iframeClassName={string} // defaults -> ''
-      // style={object} // defaults -> {}
-      title={youtube_title} // defaults -> ''
-      // loading={string} // defaults -> undefined
-      // opts={obj} // defaults -> {}
-      // onReady={func} // defaults -> noop
-      // onPlay={func} // defaults -> noop
-      // onPause={func} // defaults -> noop
-      // onEnd={func} // defaults -> noop
-      // onError={func} // defaults -> noop
-      // onStateChange={func} // defaults -> noop
-      // onPlaybackRateChange={func} // defaults -> noop
-      // onPlaybackQualityChange={func} // defaults -> noop
-    />
+    <section>
+      <h3>{youtube_title}</h3>
+      <YouTube
+        videoId={youtube_id} // defaults -> ''
+        // id={string} // defaults -> ''
+        // className={string} // defaults -> ''
+        // iframeClassName={string} // defaults -> ''
+        // style={object} // defaults -> {}
+        title={youtube_title} // defaults -> ''
+        // loading={string} // defaults -> undefined
+        // opts={obj} // defaults -> {}
+        // onReady={func} // defaults -> noop
+        // onPlay={func} // defaults -> noop
+        // onPause={func} // defaults -> noop
+        // onEnd={func} // defaults -> noop
+        // onError={func} // defaults -> noop
+        // onStateChange={func} // defaults -> noop
+        // onPlaybackRateChange={func} // defaults -> noop
+        // onPlaybackQualityChange={func} // defaults -> noop
+      />
+    </section>
   );
 };
 

@@ -4,7 +4,7 @@ import YoutubeWidgetView from "@/components/YoutubeWidgetView";
 
 const WidgetViewItem: FC<{ widget: TWidget }> = ({ widget }) => {
   const { type } = widget;
-  console.log(widget);
+
   switch (type) {
     case "text":
       return null;

@@ -24,7 +24,6 @@ const LayoutWithSidebar: FC = () => {
     textAlign: "center",
     position: "relative",
     display: "flex",
-    lineHeight: "120px",
     flexGrow: 1,
     color: "#000",
     zIndex: 0,

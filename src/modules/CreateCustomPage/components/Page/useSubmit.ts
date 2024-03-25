@@ -8,6 +8,8 @@ import {
   type TWidgets,
 } from "@/modules/servises/page/types.ts";
 import { useSavePageMutation } from "@/modules/servises/page/endpoints";
+import { useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 type TSubmit = TPage & Record<string, Array<TWidgets["widgetData"]>>;
 
@@ -23,7 +25,10 @@ export const useSubmit = (): TUSeSubmit => {
   const [savePage, { data: savedPage, error, isLoading }] =
     useSavePageMutation();
 
+  const toastRef = useRef<number | string>();
+
   const onSubmit: FormProps["onFinish"] = (data: TSubmit): void => {
+    toastRef.current = toast.loading("Saving page...");
     const formatWidgets = Object.keys(data).filter(
       (key) => key !== "page_title",
     );
@@ -47,6 +52,28 @@ export const useSubmit = (): TUSeSubmit => {
       void savePage(dataToSend);
     }
   };
+
+  useEffect(() => {
+    if (savedPage && toastRef.current) {
+      toast.update(toastRef.current, {
+        render: "Page Saved",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    }
+  }, [savedPage]);
+
+  useEffect(() => {
+    if (error && toastRef.current) {
+      toast.update(toastRef.current, {
+        render: "Save page failed",
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    }
+  }, [error]);
 
   return {
     onSubmit,
