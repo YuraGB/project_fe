@@ -4,9 +4,15 @@ import { type TSlicePage } from "@/modules/store/slices/page/pageSlice.ts";
 
 export default {
   addPage: (state: TSlicePage, action: PayloadAction<TPage[]>) => {
-    state.pages = state.pages.concat(...action.payload);
+    state = state.concat(...action.payload);
+    return state;
   },
   removePage: (state: TSlicePage, action: PayloadAction<number>) => {
-    state.pages = state.pages.filter((page) => page.id !== action.payload);
+    state = state.filter((page) => page.id !== action.payload);
+    return state;
+  },
+  setPages: (state: TSlicePage, action: PayloadAction<TPage[]>) => {
+    state = action.payload;
+    return state;
   },
 };

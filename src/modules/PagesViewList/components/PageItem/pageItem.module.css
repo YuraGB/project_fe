@@ -3,7 +3,5 @@
     overflow: auto;
     gap: 10px;
     background-color: #f5f5f5;
-    border-radius: 10px;
-    padding: 10px 0;
     cursor: pointer;
 }

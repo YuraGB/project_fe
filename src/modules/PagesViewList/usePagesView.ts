@@ -1,13 +1,13 @@
-import { useFetchPages } from "@/modules/CreateCustomPage/api/useFetchPages.ts";
 import { type TPage } from "@/modules/CreateCustomPage/types.ts";
+import { useSelector } from "react-redux";
+import { pageSelector } from "@/modules/store/slices/page/pageSlice.ts";
 
 type TUsePagesView = {
   pages: TPage[];
-  isLoading: boolean;
 };
 
 export const usePagesView = (): TUsePagesView => {
-  const { pages, isLoading } = useFetchPages();
+  const pages = useSelector(pageSelector);
 
-  return { pages, isLoading };
+  return { pages: pages ?? [] };
 };

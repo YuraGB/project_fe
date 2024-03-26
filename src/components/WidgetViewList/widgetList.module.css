@@ -1,6 +1,6 @@
 .root {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     width: 100%;
     padding: 0 20px;
     overflow: auto;

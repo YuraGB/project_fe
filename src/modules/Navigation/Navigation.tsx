@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from "react";
+import { memo, type ReactNode, useState } from "react";
 import { type MenuProps, Menu } from "antd";
 import { useMenuHelper } from "@/modules/Navigation/useMenuHelper.tsx";
 
@@ -20,4 +20,4 @@ const Navigation = (): ReactNode => {
   );
 };
 
-export default Navigation;
+export default memo(Navigation);

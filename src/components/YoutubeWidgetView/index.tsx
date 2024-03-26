@@ -1,6 +1,7 @@
 import { type TWidget } from "@/modules/CreateCustomPage/types.ts";
 import { type FC } from "react";
 import { type TYouTubeWidget } from "@/modules/ContentContainer/types.ts";
+import classes from "./widget.module.css";
 import YouTube from "react-youtube";
 
 const YoutubeWidgetView: FC<{ widget: TWidget }> = ({ widget }) => {
@@ -11,7 +12,7 @@ const YoutubeWidgetView: FC<{ widget: TWidget }> = ({ widget }) => {
   const { youtube_id, youtube_title } = widgetData as TYouTubeWidget;
 
   return (
-    <section>
+    <section className={classes.root}>
       <YouTube
         videoId={youtube_id} // defaults -> ''
         // id={string} // defaults -> ''

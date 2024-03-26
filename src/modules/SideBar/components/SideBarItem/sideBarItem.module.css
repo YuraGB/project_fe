@@ -1,0 +1,14 @@
+.root {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    transition: background-color 0.3s;
+}
+
+.root:hover {
+    background-color: rgba(245, 245, 245, 0.44);
+}

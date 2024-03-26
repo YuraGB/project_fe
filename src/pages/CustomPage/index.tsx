@@ -1,20 +1,23 @@
 import RouteWithAnimation from "@/components/RouteWithAnimation/RouteWithAnimation.tsx";
-import { useLoaderData } from "react-router-dom";
 import PageTitle from "@/components/PageTitle";
-import ContentContainer from "@/modules/ContentContainer";
-import {
-  type ContentContainerProps,
-  type TYouTubeWidget,
-} from "@/modules/ContentContainer/types.ts";
+import PageItem from "@/modules/PagesViewList/components/PageItem";
+import { type ReactNode } from "react";
+import { useSelector } from "react-redux";
+import { pageSelector } from "@/modules/store/slices/page/pageSlice.ts";
+import { useParams } from "react-router-dom";
 
-const CustomPage = () => {
-  const { title, content } =
-    useLoaderData() as ContentContainerProps<TYouTubeWidget>;
+const CustomPage = (): ReactNode => {
+  const pages = useSelector(pageSelector);
+  const params = useParams();
+  if (!pages) return null;
+  const currentPage = pages.find((page) => page.id === Number(params.pageId));
+
+  if (!currentPage) return null;
   return (
     <RouteWithAnimation>
       <article>
-        <PageTitle title={title} />
-        <ContentContainer content={content} />
+        <PageTitle title={currentPage.title} />
+        <PageItem page={currentPage} />
       </article>
     </RouteWithAnimation>
   );

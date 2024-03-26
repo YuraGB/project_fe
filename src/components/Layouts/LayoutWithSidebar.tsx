@@ -3,13 +3,14 @@ import { type CSSProperties, type FC } from "react";
 import Sider from "antd/lib/layout/Sider";
 import Navigation from "@/modules/Navigation/Navigation.tsx";
 import { Outlet } from "react-router-dom";
+import SideBar from "@/modules/SideBar";
 
 const LayoutWithSidebar: FC = () => {
   const siderStyle: React.CSSProperties = {
     textAlign: "center",
-    lineHeight: "120px",
     color: "#fff",
     backgroundColor: "#1677ff",
+    textAlignLast: "left",
   };
 
   const headerStyle: CSSProperties = {
@@ -53,7 +54,7 @@ const LayoutWithSidebar: FC = () => {
       </Header>
       <Layout>
         <Sider width="25%" style={siderStyle}>
-          Sider
+          <SideBar />
         </Sider>
         <Content style={contentStyle}>
           {" "}

@@ -14,6 +14,7 @@ const ProtectedRoutes: FC<Props> = ({ user, redirectPath = "/login" }) => {
   const { data, isLoading } = useVerifyTokenQuery(undefined, {
     skip: Boolean(user),
   });
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {

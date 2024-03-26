@@ -1,5 +1,9 @@
 import { type TPage } from "@/modules/CreateCustomPage/types.ts";
-import { useFetchPages } from "@/modules/CreateCustomPage/api/useFetchPages.ts";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addPage,
+  pageSelector,
+} from "@/modules/store/slices/page/pageSlice.ts";
 
 const newPage = {
   id: "",
@@ -10,20 +14,19 @@ const newPage = {
 type TUseCreateCustomPage = {
   pages: TPage[];
   addPage: () => void;
-  isLoading: boolean;
 };
 
 export const useCreateCustomPage = (): TUseCreateCustomPage => {
-  const { setPages, pages, isLoading } = useFetchPages();
+  const pages = useSelector(pageSelector);
+  const dispatch = useDispatch();
 
-  const addPage = (): void => {
+  const addNewPage = (): void => {
     // add new page with empty fields
-    setPages((prev: TPage[]) => [...prev, { ...newPage, id: Math.random() }]);
+    dispatch(addPage([{ ...newPage, id: Math.random() }]));
   };
 
   return {
-    pages,
-    addPage,
-    isLoading,
+    pages: pages ?? [],
+    addPage: addNewPage,
   };
 };

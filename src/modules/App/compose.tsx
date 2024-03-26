@@ -1,5 +1,9 @@
 import React, { Fragment, type PropsWithChildren, type ReactNode } from "react";
 
+/**
+ * Compose Providers
+ * @param components
+ */
 function compose(
   ...components: Array<React.FC<{ children: ReactNode }>>
 ): React.FC<{ children: ReactNode }> {

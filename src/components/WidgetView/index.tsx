@@ -20,6 +20,7 @@ const WidgetView = (props: WidgetViewProps): ReactNode => {
       whileHover={"animate"}
       style={{
         overflow: "hidden",
+        width: "100%",
       }}
     >
       <motion.p
@@ -29,7 +30,7 @@ const WidgetView = (props: WidgetViewProps): ReactNode => {
             opacity: 0.5,
           },
           animate: {
-            translateY: [0, 5, 0],
+            translateY: [0, 2, 0],
             opacity: 1,
             transition: {
               duration: 0.2,
@@ -41,6 +42,7 @@ const WidgetView = (props: WidgetViewProps): ReactNode => {
           display: "block",
           width: "100%",
           overflow: "hidden",
+          padding: "0.5rem 0",
         }}
       >
         {widget.widgetData.title ?? "No title"}
@@ -52,6 +54,7 @@ const WidgetView = (props: WidgetViewProps): ReactNode => {
           transform: "scale(0)",
           height: showWidget ? "auto" : 0,
           transition: "all 0.5s ease-in-out",
+          width: "100%",
         }}
         variants={{
           initial: {

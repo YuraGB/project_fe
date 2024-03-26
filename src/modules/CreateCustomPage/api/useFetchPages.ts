@@ -1,41 +1,45 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { userSelector } from "@/modules/store/slices/auth/authSlice.ts";
 import { useLazyGetPagesByUserIdQuery } from "@/modules/servises/page/endpoints";
-import type { TPage, TWidget } from "@/modules/CreateCustomPage/types.ts";
+import type { TPage } from "@/modules/CreateCustomPage/types.ts";
+import { type FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
+import { type SerializedError } from "@reduxjs/toolkit";
+import {
+  pageSelector,
+  setPages,
+} from "@/modules/store/slices/page/pageSlice.ts";
 
 type TUseFetchPages = {
-  pages: TPage[];
-  setPages: (
-    pages: (
-      prev: TPage[],
-    ) => Array<TPage | { id: number; title: string; widgets: TWidget[] }>,
-  ) => void;
+  pages: TPage[] | [];
   isLoading: boolean;
+  error: FetchBaseQueryError | SerializedError | undefined;
 };
 
 export const useFetchPages = (): TUseFetchPages => {
-  const [pages, setPages] = useState<TPage[]>([]);
+  const pages = useSelector(pageSelector);
   const user = useSelector(userSelector);
+  const dispatch = useDispatch();
 
   // initial load
-  const [fetchPages, { data, isLoading }] = useLazyGetPagesByUserIdQuery();
+  const [fetchPages, { data, isLoading, error }] =
+    useLazyGetPagesByUserIdQuery();
 
   useEffect(() => {
-    if (!pages.length && user?.id) {
+    if (!pages?.length && user?.id) {
       void fetchPages(user.id);
     }
   }, [user]);
 
   useEffect(() => {
     if (data) {
-      setPages(data);
+      dispatch(setPages(data));
     }
   }, [data]);
 
   return {
-    pages,
-    setPages,
+    pages: pages ?? [],
     isLoading,
+    error,
   };
 };

@@ -2,15 +2,7 @@ import { usePagesView } from "@/modules/PagesViewList/usePagesView.ts";
 import PageItem from "@/modules/PagesViewList/components/PageItem";
 
 const PagesViewList = () => {
-  const { pages, isLoading } = usePagesView();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!pages && !isLoading) {
-    return <div>No pages found</div>;
-  }
+  const { pages } = usePagesView();
 
   if (pages.length === 0) {
     return <div>No pages found</div>;
@@ -22,6 +14,8 @@ const PagesViewList = () => {
         width: "100%",
         minWidth: "300px",
         margin: "0 auto",
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
       }}
     >
       {pages.map((page) => (
