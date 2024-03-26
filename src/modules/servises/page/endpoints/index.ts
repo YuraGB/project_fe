@@ -12,6 +12,14 @@ export const pagesApiSlice = pagesApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: "Pages" }],
     }),
+    updatePage: _build.mutation<TSavePage, TSavePage>({
+      query: (data) => ({
+        url: `/page/update`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: [{ type: "Pages" }],
+    }),
     getPagesByUserId: _build.query<TPage[], number>({
       query: (id) => ({
         url: `/pages?userId=${id}`,
@@ -40,4 +48,5 @@ export const {
   useLazyGetPageQuery,
   useLazyGetPagesByUserIdQuery,
   useRemovePageMutation,
+  useUpdatePageMutation,
 } = pagesApiSlice;

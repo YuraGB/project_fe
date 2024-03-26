@@ -23,7 +23,12 @@ export const useInitData = (page: TPage): TInitData => {
 
     return Object.assign(
       {},
-      { [pageId]: { page_title: title } },
+      {
+        [pageId]: {
+          id: pageId,
+          page_title: title,
+        },
+      },
       initialledWidgets,
     );
   }, [page]);

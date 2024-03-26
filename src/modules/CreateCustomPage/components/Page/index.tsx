@@ -17,7 +17,7 @@ const Page: FC<{ page: TPage }> = ({ page }): ReactNode => {
     initData,
     onRemoveHandlerPage,
   } = usePage(page);
-  const { onSubmit } = useSubmit();
+  const { onSubmit } = useSubmit(page.id);
 
   return (
     <Card

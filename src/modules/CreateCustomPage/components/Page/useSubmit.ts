@@ -7,7 +7,7 @@ import {
   type TSaveWidgets,
   type TWidgets,
 } from "@/modules/servises/page/types.ts";
-import { useSavePageMutation } from "@/modules/servises/page/endpoints";
+import { useUpdatePageMutation } from "@/modules/servises/page/endpoints";
 import { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 
@@ -15,46 +15,62 @@ type TSubmit = TPage & Record<string, Array<TWidgets["widgetData"]>>;
 
 type TUSeSubmit = {
   onSubmit: FormProps["onFinish"];
-  isLoading: boolean;
-  error: unknown;
   data: unknown;
 };
 
-export const useSubmit = (): TUSeSubmit => {
+export const useSubmit = (pageId: number): TUSeSubmit => {
   const user = useSelector(userSelector);
-  const [savePage, { data: savedPage, error, isLoading }] =
-    useSavePageMutation();
+
+  const [updatePage, { data: pageUpdated, error: updatePageError }] =
+    useUpdatePageMutation();
 
   const toastRef = useRef<number | string>();
 
   const onSubmit: FormProps["onFinish"] = (data: TSubmit): void => {
     toastRef.current = toast.loading("Saving page...");
+
+    // filter out page_title
     const formatWidgets = Object.keys(data).filter(
       (key) => key !== "page_title",
     );
 
-    const widgets: TSaveWidgets[] = formatWidgets.map((widgetType) => {
-      const listOfWidgets = Object.values(data[widgetType]);
+    // filter out empty widgets
+    // format widgets to match the backend
+    const widgets: TSaveWidgets[] = formatWidgets
+      .filter((e) => e)
+      .map((widgetType) => {
+        const listOfWidgets = [];
+        for (const [key, value] of Object.entries(data[widgetType])) {
+          // if key is not a number, it means it is a widget that wasn't saved yet
+          if (value) {
+            if (isNaN(Number(key))) {
+              listOfWidgets.push(value);
+            } else {
+              listOfWidgets.push({ id: Number(key), ...value });
+            }
+          }
+        }
 
-      return {
-        type: widgetType,
-        widgets: listOfWidgets,
-      };
-    });
+        return {
+          type: widgetType,
+          widgets: listOfWidgets,
+        };
+      });
 
     if (user?.id) {
       const dataToSend = {
+        id: pageId,
         page_title: data.page_title,
         userId: user?.id,
         widgets,
       };
 
-      void savePage(dataToSend);
+      void updatePage(dataToSend);
     }
   };
 
   useEffect(() => {
-    if (savedPage && toastRef.current) {
+    if (pageUpdated && toastRef.current) {
       toast.update(toastRef.current, {
         render: "Page Saved",
         type: "success",
@@ -62,10 +78,10 @@ export const useSubmit = (): TUSeSubmit => {
         autoClose: 2000,
       });
     }
-  }, [savedPage]);
+  }, [pageUpdated]);
 
   useEffect(() => {
-    if (error && toastRef.current) {
+    if (updatePageError && toastRef.current) {
       toast.update(toastRef.current, {
         render: "Save page failed",
         type: "error",
@@ -73,12 +89,10 @@ export const useSubmit = (): TUSeSubmit => {
         autoClose: 2000,
       });
     }
-  }, [error]);
+  }, [updatePageError]);
 
   return {
     onSubmit,
-    isLoading,
-    error,
-    data: savedPage,
+    data: updatePage,
   };
 };

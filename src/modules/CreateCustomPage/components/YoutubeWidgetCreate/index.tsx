@@ -19,7 +19,7 @@ const YoutubeWidgetCreate: FC<{ widget: TWidget }> = ({ widget }) => {
       <Form.Item noStyle name={[widget.type, widget.id, "youtube_title"]}>
         <Input placeholder="title" size={"large"} />
       </Form.Item>
-      <Form.Item noStyle name={["youtube", widget.id, "youtube_id"]}>
+      <Form.Item noStyle name={[widget.type, widget.id, "youtube_id"]}>
         <Input placeholder="Youtube id" size={"large"} />
       </Form.Item>
       <CloseOutlined

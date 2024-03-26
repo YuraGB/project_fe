@@ -18,6 +18,7 @@ export type TUsePage = {
 export const usePage = (page: TPage): TUsePage => {
   const { widgets } = page;
   const initData = useInitData(page);
+
   const [widgetsToDisplay, setWidgetsToDisplay] = useState<TWidget[]>(widgets);
   const {
     isLoading: removeInPageProgress,

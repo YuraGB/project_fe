@@ -1,15 +1,8 @@
 import { type TPage } from "@/modules/CreateCustomPage/types.ts";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addPage,
-  pageSelector,
-} from "@/modules/store/slices/page/pageSlice.ts";
-
-const newPage = {
-  id: "",
-  title: "Page",
-  widgets: [],
-};
+import { useSelector } from "react-redux";
+import { pageSelector } from "@/modules/store/slices/page/pageSlice.ts";
+import { useSavePageMutation } from "@/modules/servises/page/endpoints";
+import { userSelector } from "@/modules/store/slices/auth/authSlice.ts";
 
 type TUseCreateCustomPage = {
   pages: TPage[];
@@ -18,11 +11,15 @@ type TUseCreateCustomPage = {
 
 export const useCreateCustomPage = (): TUseCreateCustomPage => {
   const pages = useSelector(pageSelector);
-  const dispatch = useDispatch();
+  const user = useSelector(userSelector);
+  const [savePage, { data: _savedPage, error: _saveError }] =
+    useSavePageMutation();
 
   const addNewPage = (): void => {
-    // add new page with empty fields
-    dispatch(addPage([{ ...newPage, id: Math.random() }]));
+    if (user?.id) {
+      // add new page with empty fields
+      void savePage({ page_title: "Page", widgets: [], userId: user.id });
+    }
   };
 
   return {
