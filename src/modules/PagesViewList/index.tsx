@@ -1,7 +1,8 @@
 import { usePagesView } from "@/modules/PagesViewList/usePagesView.ts";
 import PageItem from "@/modules/PagesViewList/components/PageItem";
+import { type ReactNode } from "react";
 
-const PagesViewList = () => {
+const PagesViewList = (): ReactNode => {
   const { pages } = usePagesView();
 
   if (pages.length === 0) {

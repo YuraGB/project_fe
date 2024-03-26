@@ -68,9 +68,7 @@ const Page: FC<{ page: TPage }> = ({ page }): ReactNode => {
           ))}
         </section>
         <Button type={"primary"} htmlType={"submit"}>
-          {Boolean(widgetsToDisplay?.length)
-            ? "Update the page"
-            : "Save the page"}
+          Update the page
         </Button>
       </Form>
     </Card>
