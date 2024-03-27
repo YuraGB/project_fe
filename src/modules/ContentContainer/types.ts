@@ -17,3 +17,16 @@ export type TYouTubeWidget = {
   youtube_title: string;
   youtube_id: string;
 };
+
+export type TLinkWidget = {
+  title?: string;
+  link_url: string;
+  link_title: string;
+};
+
+export type TImageWidget = {
+  title?: string;
+  image_link: string;
+  image_title: string;
+  image_src: string;
+};

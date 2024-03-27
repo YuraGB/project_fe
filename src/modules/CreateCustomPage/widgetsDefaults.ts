@@ -5,7 +5,7 @@ const defaultWidgets = new Map()
     widgetData: {},
   })
   .set("image", {
-    type: "Image",
+    type: "image",
     id: "",
     widgetData: {},
   })
