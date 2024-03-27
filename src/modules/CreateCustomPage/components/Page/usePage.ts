@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { type TPage, type TWidget } from "@/modules/CreateCustomPage/types.ts";
 import widgetsDefaults from "@/modules/CreateCustomPage/widgetsDefaults.ts";
 import { randomString } from "@/util";
 import { useInitData } from "@/modules/CreateCustomPage/components/Page/useInitData.ts";
 import { useRemovePage } from "@/modules/CreateCustomPage/api/useRemovePage.ts";
+import { useRemoveWidgetMutation } from "@/modules/servises/widget/endpoints";
 
 export type TUsePage = {
   widgetsToDisplay: TWidget[];
@@ -18,6 +19,10 @@ export type TUsePage = {
 export const usePage = (page: TPage): TUsePage => {
   const { widgets } = page;
   const initData = useInitData(page);
+  const [
+    onRemove,
+    { isLoading: _removing, error: _removeError, data: removeData },
+  ] = useRemoveWidgetMutation();
 
   const [widgetsToDisplay, setWidgetsToDisplay] = useState<TWidget[]>(widgets);
   const {
@@ -37,8 +42,19 @@ export const usePage = (page: TPage): TUsePage => {
     }
   };
 
-  const removeWidget = (widgetId: string): void => {
-    setWidgetsToDisplay((prev) => prev.filter((w) => w.id !== widgetId));
+  useEffect(() => {
+    if (removeData?.id) {
+      setWidgetsToDisplay((prev) => prev.filter((w) => w.id !== removeData.id));
+    }
+  }, [removeData]);
+
+  const removeWidget = (widgetId: string | number): void => {
+    if (typeof widgetId === "string") {
+      setWidgetsToDisplay((prev) => prev.filter((w) => w.id !== widgetId));
+    }
+    if (typeof widgetId === "number") {
+      void onRemove(widgetId);
+    }
   };
 
   return {

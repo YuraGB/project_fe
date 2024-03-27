@@ -1,5 +1,5 @@
 export type TWidget<T = { title: string }> = {
-  id: string;
+  id: number | string;
   type: string;
   title?: string;
   remove?: (id: string) => void;
