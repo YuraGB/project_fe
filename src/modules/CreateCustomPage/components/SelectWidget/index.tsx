@@ -10,7 +10,7 @@ const SelectWidget: FC<{ selectedWidget: { current: string } }> = ({
       <Select
         defaultValue={"Select widget type"}
         style={{ width: "100%" }}
-        options={[widgets.youtube]}
+        options={Object.values(widgets)}
         onChange={(value) => (selectedWidget.current = value)}
       />
     </section>

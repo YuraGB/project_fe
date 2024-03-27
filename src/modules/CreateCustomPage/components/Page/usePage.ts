@@ -33,6 +33,7 @@ export const usePage = (page: TPage): TUsePage => {
 
   const addWidget = (widget: string): void => {
     if (!widget) return;
+
     const newWidget = widgetsDefaults.get(widget.toLowerCase()) as TWidget;
 
     if (newWidget) {

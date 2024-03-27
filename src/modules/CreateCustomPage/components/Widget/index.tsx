@@ -1,6 +1,8 @@
 import { type FC, type ReactNode } from "react";
 import YoutubeWidgetCreate from "@/modules/CreateCustomPage/components/YoutubeWidgetCreate";
 import { type TWidget } from "@/modules/CreateCustomPage/types.ts";
+import LinkWidgetCreate from "@/modules/CreateCustomPage/components/LinkWidgetCreate";
+import ImageWidgetCreate from "@/modules/CreateCustomPage/components/ImageWidgetCreate";
 
 const Widget: FC<{ widget: TWidget; widgetCount: number }> = ({
   widget,
@@ -9,9 +11,9 @@ const Widget: FC<{ widget: TWidget; widgetCount: number }> = ({
     case "youtube":
       return <YoutubeWidgetCreate widget={widget} />;
     case "image":
-      return null;
-    case "text":
-      return null;
+      return <ImageWidgetCreate widget={widget} />;
+    case "link":
+      return <LinkWidgetCreate widget={widget} />;
     default:
       return null;
   }
