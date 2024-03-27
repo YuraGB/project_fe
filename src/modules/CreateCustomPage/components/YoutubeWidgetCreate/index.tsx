@@ -24,7 +24,7 @@ const YoutubeWidgetCreate: FC<{ widget: TWidget }> = ({ widget }) => {
       </Form.Item>
       <CloseOutlined
         onClick={() => {
-          widget.remove?.(widget.id);
+          widget.remove?.(widget.id as string);
         }}
       />
     </Space>

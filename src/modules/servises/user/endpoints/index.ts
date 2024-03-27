@@ -5,7 +5,7 @@ export const authApiSlice = userApiSlice.injectEndpoints({
   endpoints: (_build) => ({
     updateUserInfo: _build.mutation<StoreUser, StoreUser>({
       query: (data) => ({
-        url: "/user/update",
+        url: "/api/v1/user/update",
         method: "PUT",
         body: data,
       }),

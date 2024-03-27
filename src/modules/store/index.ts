@@ -10,6 +10,7 @@ import { authSliceReducer } from "@/modules/store/slices/auth/authSlice";
 import { userApiSlice } from "@/modules/servises/user";
 import { pagesApi } from "@/modules/servises/page";
 import { pagesSliceReducer } from "@/modules/store/slices/page/pageSlice.ts";
+import { widgetApiSlice } from "@/modules/servises/widget";
 
 const rootReducer = combineReducers({
   auth: authSliceReducer,
@@ -17,19 +18,19 @@ const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   [userApiSlice.reducerPath]: userApiSlice.reducer,
   [pagesApi.reducerPath]: pagesApi.reducer,
+  [widgetApiSlice.reducerPath]: widgetApiSlice.reducer,
 });
 
 export const setupStore = (): EnhancedStore =>
   configureStore({
     devTools: process.env.NODE_ENV !== "production",
     reducer: rootReducer,
-    // Adding the api middleware enables caching, invalidation, polling,
-    // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware()
         .concat(apiSlice.middleware)
         .concat(userApiSlice.middleware)
-        .concat(pagesApi.middleware),
+        .concat(pagesApi.middleware)
+        .concat(widgetApiSlice.middleware),
   });
 
 export type RootState = ReturnType<typeof rootReducer>;
