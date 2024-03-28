@@ -54,7 +54,14 @@ export const usePage = (page: TPage): TUsePage => {
       setWidgetsToDisplay((prev) => prev.filter((w) => w.id !== widgetId));
     }
     if (typeof widgetId === "number") {
-      void onRemove(widgetId);
+      const widget = widgetsToDisplay.find((w) => w.id === widgetId);
+
+      if (widget) {
+        void onRemove({
+          id: widgetId,
+          type: widget.type,
+        });
+      }
     }
   };
 

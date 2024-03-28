@@ -11,13 +11,14 @@ import { userApiSlice } from "@/modules/servises/user";
 import { pagesApi } from "@/modules/servises/page";
 import { pagesSliceReducer } from "@/modules/store/slices/page/pageSlice.ts";
 import { widgetApiSlice } from "@/modules/servises/widget";
+import { pagesApiSlice } from "@/modules/servises/page/endpoints";
 
 const rootReducer = combineReducers({
   auth: authSliceReducer,
   pages: pagesSliceReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
   [userApiSlice.reducerPath]: userApiSlice.reducer,
-  [pagesApi.reducerPath]: pagesApi.reducer,
+  [pagesApiSlice.reducerPath]: pagesApi.reducer,
   [widgetApiSlice.reducerPath]: widgetApiSlice.reducer,
 });
 

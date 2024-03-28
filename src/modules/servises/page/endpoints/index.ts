@@ -25,14 +25,16 @@ export const pagesApiSlice = pagesApi.injectEndpoints({
         url: `/pages?userId=${id}`,
         method: "GET",
       }),
-      providesTags: (_result, _error, _id) => [{ type: "Pages" }],
     }),
     removePage: _build.mutation<number, number>({
       query: (id) => ({
         url: `/page/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (_result, _error, _id) => [{ type: "Pages" }],
+      invalidatesTags: (_result, _error, _id) => {
+        console.log(_result, _error, _id);
+        return [{ type: "Pages" }];
+      },
     }),
     getPage: _build.query<TPage, number>({
       query: (id) => ({
