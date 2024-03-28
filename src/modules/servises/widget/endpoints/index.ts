@@ -1,9 +1,12 @@
 import { widgetApiSlice } from "@/modules/servises/widget";
-import { type TRemoveWidget } from "@/modules/servises/widget/endpoints/types.ts";
+import {
+  type TRemoveResponse,
+  type TRemoveWidget,
+} from "@/modules/servises/widget/endpoints/types.ts";
 
 export const widgetApi = widgetApiSlice.injectEndpoints({
   endpoints: (_build) => ({
-    removeWidget: _build.mutation<TRemoveWidget, number>({
+    removeWidget: _build.mutation<TRemoveResponse, TRemoveWidget>({
       query: (data) => ({
         url: "/widget/remove",
         method: "DELETE",
