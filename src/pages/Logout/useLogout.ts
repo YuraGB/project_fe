@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { logout } from "@/modules/store/slices/auth/authSlice.ts";
 import { type FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { type SerializedError } from "@reduxjs/toolkit";
-import { setPages } from "@/modules/store/slices/page/pageSlice.ts";
 
 const useLogout = (): {
   error: FetchBaseQueryError | SerializedError | undefined;
@@ -21,7 +20,6 @@ const useLogout = (): {
   useEffect(() => {
     if (data ?? error) {
       dispatch(logout());
-      dispatch(setPages([]));
       navigate("/");
     }
   }, [data, error]);
