@@ -4,6 +4,7 @@ import { type StoreUser } from "@/modules/servises/auth/endpoints/types.ts";
 import { useVerifyTokenQuery } from "@/modules/servises/auth/endpoints";
 import { useAppDispatch } from "@/modules/store";
 import { setCredentials } from "@/modules/store/slices/auth/authSlice.ts";
+import { useFetchPages } from "@/modules/CreateCustomPage/api/useFetchPages.ts";
 
 type Props = PropsWithChildren & {
   user: StoreUser | null;
@@ -14,7 +15,7 @@ const ProtectedRoutes: FC<Props> = ({ user, redirectPath = "/login" }) => {
   const { data, isLoading } = useVerifyTokenQuery(undefined, {
     skip: Boolean(user),
   });
-
+  useFetchPages();
   const dispatch = useAppDispatch();
 
   useEffect(() => {

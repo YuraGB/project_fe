@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { type TPage, type TWidget } from "@/modules/CreateCustomPage/types.ts";
 import widgetsDefaults from "@/modules/CreateCustomPage/widgetsDefaults.ts";
-import { randomString } from "@/util";
 import { useInitData } from "@/modules/CreateCustomPage/components/Page/useInitData.ts";
 import { useRemovePage } from "@/modules/CreateCustomPage/api/useRemovePage.ts";
 import { useRemoveWidgetMutation } from "@/modules/servises/widget/endpoints";
@@ -38,7 +37,7 @@ export const usePage = (page: TPage): TUsePage => {
 
     if (newWidget) {
       setWidgetsToDisplay((prev) => {
-        return [{ ...newWidget, id: randomString() }, ...prev];
+        return [...prev, { ...newWidget, id: prev.length }];
       });
     }
   };

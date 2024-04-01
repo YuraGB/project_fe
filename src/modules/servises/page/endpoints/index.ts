@@ -10,7 +10,7 @@ export const pagesApiSlice = pagesApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: [{ type: "Pages" }],
+      invalidatesTags: ["Pages"],
     }),
     updatePage: _build.mutation<TSavePage, TSavePage>({
       query: (data) => ({
@@ -18,24 +18,9 @@ export const pagesApiSlice = pagesApi.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: [{ type: "Pages" }],
+      invalidatesTags: () => ["Pages"],
     }),
-    getPagesByUserId: _build.query<TPage[], number>({
-      query: (id) => ({
-        url: `/pages?userId=${id}`,
-        method: "GET",
-      }),
-    }),
-    removePage: _build.mutation<number, number>({
-      query: (id) => ({
-        url: `/page/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: (_result, _error, _id) => {
-        console.log(_result, _error, _id);
-        return [{ type: "Pages" }];
-      },
-    }),
+
     getPage: _build.query<TPage, number>({
       query: (id) => ({
         url: `/page/${id}`,

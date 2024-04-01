@@ -1,19 +1,15 @@
 import { type TPage } from "@/modules/CreateCustomPage/types.ts";
-
-import { useFetchPages } from "@/modules/CreateCustomPage/api/useFetchPages.ts";
-import { type FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
-import { type SerializedError } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { pageSelector } from "@/modules/store/slices/page/pageSlice.ts";
 
 type TUseSideBar = {
   pages: TPage[] | null;
-  error: FetchBaseQueryError | SerializedError | undefined;
 };
 
 export const useSideBar = (): TUseSideBar => {
-  const { pages, error } = useFetchPages();
+  const pages = useSelector(pageSelector);
 
   return {
     pages: pages ?? [],
-    error,
   };
 };

@@ -33,7 +33,6 @@ export const useSubmit = (pageId: number): TUSeSubmit => {
     const formatWidgets = Object.keys(data).filter(
       (key) => key !== "page_title",
     );
-
     // filter out empty widgets
     // format widgets to match the backend
     const widgets: TSaveWidgets[] = formatWidgets
