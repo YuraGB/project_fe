@@ -1,5 +1,5 @@
 import ProtectedRoutes from "@/components/ProtectedRoutes";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LayoutWithSidebar from "@/components/Layouts/LayoutWithSidebar.tsx";
 import UserHome from "@/pages/UserHome";
 import UserProfile from "@/pages/UserProfile";
@@ -11,10 +11,9 @@ import CustomPage from "@/pages/CustomPage";
 
 const UserRoutes: FC = () => {
   const user = useSelector(userSelector);
-  const location = useLocation();
 
   return (
-    <Routes location={location} key={location.key + "user"}>
+    <Routes>
       <Route element={<ProtectedRoutes user={user} />}>
         <Route path="/" element={<LayoutWithSidebar />}>
           <Route index element={<UserHome />} />
